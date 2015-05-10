@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="東一"
+        android:id="@+id/drink_name"
+        android:textSize="48dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/drink_image"
+        android:src="@drawable/sample_photo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="東一美味しい。東一美味しい東一美味しい東一美味しいよぉぉぉぉぉおぉぉぉ"
+        android:id="@+id/drink_details"
+        android:textSize="24dp" />
+</LinearLayout>
