@@ -6,7 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ListView
 import android.widget.TextView
-
+import kotlinx.android.synthetic.activity_drink.*
 
 public class DrinkActivity : AppCompatActivity() {
 
@@ -15,8 +15,7 @@ public class DrinkActivity : AppCompatActivity() {
         setContentView(R.layout.activity_drink)
 
         val intent = getIntent()
-        val drinkName = intent.getSerializableExtra("drink_name") as String
-        val drinkNameView = findViewById(R.id.drink_name) as (TextView)
-        drinkNameView.setText(drinkName)
+        val name = intent.getSerializableExtra("drink_name") as String
+        drink_name.setText(name)
     }
 }

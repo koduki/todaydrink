@@ -9,7 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
-
+import kotlinx.android.synthetic.activity_main.*
 
 public class MainActivity : AppCompatActivity() {
 
@@ -18,18 +18,15 @@ public class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val drinkAdapter = DrinkAdapter(this)
-        val drinkList = findViewById(R.id.drinkListView) as (ListView)
-        drinkList.setAdapter(drinkAdapter)
+        drinkListView.setAdapter(drinkAdapter)
         drinkAdapter.add("日本酒")
         drinkAdapter.add("ビール")
         drinkAdapter.add("ワイン")
 
-        drinkList.setOnItemClickListener(object : AdapterView.OnItemClickListener {
+        drinkListView.setOnItemClickListener(object : AdapterView.OnItemClickListener {
             override fun onItemClick(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
-                //def list = (ListView) findViewById(R.id.part_list)
-                //def part = (Part) list.getItemAtPosition(position)
+
                 val name = adapterView.getItemAtPosition(i) as String
-                        Log.i("hogehoge", name)
                  val intent = Intent(getApplicationContext(), javaClass<DrinkActivity>())
                 intent.putExtra("drink_name", name);
 
