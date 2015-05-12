@@ -19,6 +19,12 @@ android {
         }
     }
 
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'META-INF/NOTICE'
+    }
+    
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
@@ -28,6 +34,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'com.firebase:firebase-client-android:2.2.4+'
 
 }
 
