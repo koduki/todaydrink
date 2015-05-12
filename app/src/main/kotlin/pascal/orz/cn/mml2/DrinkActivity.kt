@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.activity_drink.*
 
 public class DrinkActivity : AppCompatActivity() {
@@ -17,5 +18,9 @@ public class DrinkActivity : AppCompatActivity() {
         val intent = getIntent()
         val name = intent.getSerializableExtra("drink_name") as String
         drink_name.setText(name)
+
+        drunk_button.setOnClickListener {
+            Toast.makeText(getApplication(), "ドリンクヒストリーに追加しました", Toast.LENGTH_LONG)?.show()
+        }
     }
 }

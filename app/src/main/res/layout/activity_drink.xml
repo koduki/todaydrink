@@ -1,25 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="東一"
-        android:id="@+id/drink_name"
-        android:textSize="48dp" />
+    <ScrollView
+        android:id="@+id/ScrollView01"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/drink_image"
-        android:src="@drawable/sample_photo" />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="東一美味しい。東一美味しい東一美味しい東一美味しいよぉぉぉぉぉおぉぉぉ"
-        android:id="@+id/drink_details"
-        android:textSize="24dp" />
+            <TextView
+                android:id="@+id/drink_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="東一"
+                android:textSize="48dp" />
+
+            <Button
+                android:id="@+id/drunk_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="飲んだ！" />
+
+            <ImageView
+                android:id="@+id/drink_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sample_photo" />
+
+            <TextView
+                android:id="@+id/drink_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="東一美味しい。東一美味しい東一美味しい東一美味しいよぉぉぉぉぉおぉぉぉ"
+                android:textSize="24dp" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

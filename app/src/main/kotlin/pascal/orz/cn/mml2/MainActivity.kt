@@ -3,13 +3,11 @@ package pascal.orz.cn.mml2
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ListView
-import kotlinx.android.synthetic.activity_main.*
+import kotlinx.android.synthetic.activity_main.drinkListView
 
 public class MainActivity : AppCompatActivity() {
 
@@ -27,7 +25,7 @@ public class MainActivity : AppCompatActivity() {
             override fun onItemClick(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
 
                 val name = adapterView.getItemAtPosition(i) as String
-                 val intent = Intent(getApplicationContext(), javaClass<DrinkActivity>())
+                val intent = Intent(getApplicationContext(), javaClass<DrinkActivity>())
                 intent.putExtra("drink_name", name);
 
                 startActivity(intent)
