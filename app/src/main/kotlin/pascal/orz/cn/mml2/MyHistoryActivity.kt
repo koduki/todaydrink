@@ -8,32 +8,47 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
+import com.firebase.client.ChildEventListener
+import com.firebase.client.DataSnapshot
+import com.firebase.client.Firebase
+import com.firebase.client.FirebaseError
 import kotlinx.android.synthetic.activity_main.drinkListView
-import net.danlew.android.joda.JodaTimeAndroid
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
+import java.util.HashMap
 
-public class MainActivity : AppCompatActivity() {
+public class MyHistoryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        JodaTimeAndroid.init(this);
-
+        setContentView(R.layout.activity_my_history)
+        Firebase.setAndroidContext(this);
 
         val drinkAdapter = DrinkAdapter(this)
         drinkListView.setAdapter(drinkAdapter)
-        drinkAdapter.add("日本酒")
-        drinkAdapter.add("ビール")
-        drinkAdapter.add("ワイン")
 
-        drinkListView.setOnItemClickListener(object : AdapterView.OnItemClickListener {
-            override fun onItemClick(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
-
-                val name = adapterView.getItemAtPosition(i) as String
-                val intent = Intent(getApplicationContext(), javaClass<DrinkActivity>())
-                intent.putExtra("drink_name", name);
-
-                startActivity(intent)
+        val firebase = Firebase("https://shining-heat-6127.firebaseio.com/")
+        firebase.addChildEventListener(object :ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot?, previousChildKey: String?) {
+                val drinks = snapshot!!.child("drink_histories").getChildren()
+                drinks.forEach { x ->
+                    val drink = x.getValue(javaClass<DrinkHistory>())
+                    drinkAdapter.add(drink.drinkName + " - " + DateTime(drink.createdAt).toString("yyyy/MM/dd"))
+                }
             }
+
+            override fun onChildRemoved(p0: DataSnapshot?) {
+            }
+
+            override fun onCancelled(p0: FirebaseError?) {
+            }
+
+            override fun onChildMoved(p0: DataSnapshot?, p1: String?) {
+            }
+
+            override fun onChildChanged(p0: DataSnapshot?, p1: String?) {
+            }
+
         })
     }
 
