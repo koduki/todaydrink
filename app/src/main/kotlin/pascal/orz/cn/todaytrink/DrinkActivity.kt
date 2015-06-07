@@ -1,4 +1,4 @@
-package pascal.orz.cn.mml2
+package pascal.orz.cn.todaytrink
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

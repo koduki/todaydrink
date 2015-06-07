@@ -1,4 +1,4 @@
-package pascal.orz.cn.mml2
+package pascal.orz.cn.todaytrink
 
 /**
  * Created by koduki on 2015/05/18.

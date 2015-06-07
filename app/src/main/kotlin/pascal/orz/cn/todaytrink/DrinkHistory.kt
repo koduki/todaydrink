@@ -1,4 +1,4 @@
-package pascal.orz.cn.mml2
+package pascal.orz.cn.todaytrink
 
 import org.joda.time.DateTime
 import java.util.Date

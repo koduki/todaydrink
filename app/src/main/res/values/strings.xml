@@ -1,8 +1,10 @@
 <resources>
-    <string name="app_name">mml2</string>
+    <string name="app_name">今日は何飲む？</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="action_homes">ホーム</string>
-    <string name="action_my_drinks">お酒履歴へ</string>
+    <string name="action_home">お酒一覧</string>
+    <string name="action_add_drink">お酒を追加</string>
+    <string name="action_my_drink_history">飲酒履歴へ</string>
+
 </resources>

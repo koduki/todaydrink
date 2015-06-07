@@ -1,4 +1,4 @@
-package pascal.orz.cn.mml2
+package pascal.orz.cn.todaytrink
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
+import com.firebase.client.ChildEventListener
+import com.firebase.client.DataSnapshot
+import com.firebase.client.Firebase
+import com.firebase.client.FirebaseError
 import kotlinx.android.synthetic.activity_main.drinkListView
 import net.danlew.android.joda.JodaTimeAndroid
+import java.net.URLDecoder
 
 public class MainActivity : AppCompatActivity() {
 
@@ -17,13 +22,34 @@ public class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         JodaTimeAndroid.init(this);
-
+        Firebase.setAndroidContext(this);
 
         val drinkAdapter = DrinkAdapter(this)
         drinkListView.setAdapter(drinkAdapter)
-        drinkAdapter.add("日本酒")
-        drinkAdapter.add("ビール")
-        drinkAdapter.add("ワイン")
+
+        val firebase = Firebase("https://shining-heat-6127.firebaseio.com/")
+        firebase.addChildEventListener(object :ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot?, previousChildKey: String?) {
+                val drinks = snapshot!!.child("drinks").getChildren()
+                drinks.forEach { x ->
+                    val drink = x.getValue(javaClass<Drink>())
+                    drinkAdapter.add(drink.name)
+                }
+            }
+
+            override fun onChildRemoved(p0: DataSnapshot?) {
+            }
+
+            override fun onCancelled(p0: FirebaseError?) {
+            }
+
+            override fun onChildMoved(p0: DataSnapshot?, p1: String?) {
+            }
+
+            override fun onChildChanged(p0: DataSnapshot?, p1: String?) {
+            }
+
+        })
 
         drinkListView.setOnItemClickListener(object : AdapterView.OnItemClickListener {
             override fun onItemClick(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
@@ -45,18 +71,19 @@ public class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id = item!!.getItemId()
 
-        if (id == R.id.action_homes) {
-            return true
-        }
-
         return when(id) {
-            R.id.action_homes -> {
+            R.id.action_home -> {
                 val intent = Intent(getApplicationContext(), javaClass<MainActivity>())
                 startActivity(intent)
                 true
             }
-            R.id.action_my_drinks -> {
+            R.id.action_my_drink_history -> {
                 val intent = Intent(getApplicationContext(), javaClass<MyHistoryActivity>())
+                startActivity(intent)
+                true
+            }
+            R.id.action_add_drink -> {
+                val intent = Intent(getApplicationContext(), javaClass<DrinkAddActivity>())
                 startActivity(intent)
                 true
             }

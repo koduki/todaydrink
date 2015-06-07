@@ -1,4 +1,4 @@
-package pascal.orz.cn.mml2
+package pascal.orz.cn.todaytrink
 
 import android.content.Intent
 import android.os.Bundle
@@ -60,18 +60,23 @@ public class MyHistoryActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id = item!!.getItemId()
 
-        if (id == R.id.action_homes) {
+        if (id == R.id.action_home) {
             return true
         }
 
         return when(id) {
-            R.id.action_homes -> {
+            R.id.action_home -> {
                 val intent = Intent(getApplicationContext(), javaClass<MainActivity>())
                 startActivity(intent)
                 true
             }
-            R.id.action_my_drinks -> {
+            R.id.action_my_drink_history -> {
                 val intent = Intent(getApplicationContext(), javaClass<MyHistoryActivity>())
+                startActivity(intent)
+                true
+            }
+            R.id.action_add_drink -> {
+                val intent = Intent(getApplicationContext(), javaClass<DrinkAddActivity>())
                 startActivity(intent)
                 true
             }
