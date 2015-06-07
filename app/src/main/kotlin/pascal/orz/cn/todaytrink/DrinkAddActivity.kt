@@ -5,10 +5,12 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
+import android.graphics.drawable.BitmapDrawable
 import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Base64
 import android.util.Log
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -19,6 +21,7 @@ import kotlinx.android.synthetic.activity_drink_add.drink_image
 import kotlinx.android.synthetic.activity_drink_add.drink_name
 import kotlinx.android.synthetic.activity_drink_add.save_button
 import kotlinx.android.synthetic.activity_drink_add.select_image_button
+import java.io.ByteArrayOutputStream
 
 /**
  * Created by koduki on 2015/05/24.
@@ -46,7 +49,16 @@ public class DrinkAddActivity : AppCompatActivity() {
 
         save_button.setOnClickListener {
             val firebase = Firebase("https://shining-heat-6127.firebaseio.com/")
-            firebase.child("data").child("drinks").push().setValue(Drink(drink_name.getText().toString()))
+
+            val drawable =  drink_image.getDrawable() as BitmapDrawable
+            val bitmap = drawable.getBitmap();
+
+            val bos =  ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 1, bos)
+            val data = bos.toByteArray();
+            val image = Base64.encodeToString(data, Base64.NO_WRAP);
+
+            firebase.child("data").child("drinks").push().setValue(Drink(drink_name.getText().toString(), image))
             Toast.makeText(getApplication(), "登録しました", Toast.LENGTH_LONG)?.show()
         }
     }

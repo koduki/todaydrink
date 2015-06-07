@@ -1,8 +1,11 @@
 package pascal.orz.cn.todaytrink
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Base64
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -14,6 +17,8 @@ import com.firebase.client.Firebase
 import com.firebase.client.FirebaseError
 import kotlinx.android.synthetic.activity_main.drinkListView
 import net.danlew.android.joda.JodaTimeAndroid
+import java.io.File
+import java.io.FileOutputStream
 import java.net.URLDecoder
 
 public class MainActivity : AppCompatActivity() {
@@ -33,7 +38,7 @@ public class MainActivity : AppCompatActivity() {
                 val drinks = snapshot!!.child("drinks").getChildren()
                 drinks.forEach { x ->
                     val drink = x.getValue(javaClass<Drink>())
-                    drinkAdapter.add(drink.name)
+                    drinkAdapter.add(drink)
                 }
             }
 
@@ -54,9 +59,18 @@ public class MainActivity : AppCompatActivity() {
         drinkListView.setOnItemClickListener(object : AdapterView.OnItemClickListener {
             override fun onItemClick(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
 
-                val name = adapterView.getItemAtPosition(i) as String
+                val drink = adapterView.getItemAtPosition(i) as Drink
+                val imageData = Base64.decode(drink.image, Base64.NO_WRAP)
+                val image = BitmapFactory.decodeByteArray(imageData, 0, imageData.size())
+                val fileDir = getExternalCacheDir()
+                val file =  File(fileDir, "cache.jpg");
+                val fo = FileOutputStream(file)
+                fo.write(imageData)
+                fo.close()
+
                 val intent = Intent(getApplicationContext(), javaClass<DrinkActivity>())
-                intent.putExtra("drink_name", name);
+                intent.putExtra("drink_name", drink.name);
+                intent.putExtra("drink_image_path", fileDir)
 
                 startActivity(intent)
             }

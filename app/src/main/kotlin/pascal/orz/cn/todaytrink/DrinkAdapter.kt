@@ -11,7 +11,7 @@ import android.widget.TextView
 /**
  * Created by koduki on 2015/05/11.
  */
-public class DrinkAdapter(private val mContext: Context) : ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1) {
+public class DrinkAdapter(private val mContext: Context) : ArrayAdapter<Drink>(mContext, android.R.layout.simple_list_item_1) {
 
     private val mInflater: LayoutInflater
     {
@@ -24,7 +24,7 @@ public class DrinkAdapter(private val mContext: Context) : ArrayAdapter<String>(
         val item = getItem(position)
 
         val name = view.findViewById(R.id.drink_name) as TextView
-        name.setText(item)
+        name.setText(item.name)
 
         return view
     }

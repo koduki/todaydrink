@@ -24,8 +24,8 @@ public class MyHistoryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_my_history)
         Firebase.setAndroidContext(this);
 
-        val drinkAdapter = DrinkAdapter(this)
-        drinkListView.setAdapter(drinkAdapter)
+        val historyAdapter = DrinkHistoryAdapter(this)
+        drinkListView.setAdapter(historyAdapter)
 
         val firebase = Firebase("https://shining-heat-6127.firebaseio.com/")
         firebase.addChildEventListener(object :ChildEventListener {
@@ -33,7 +33,7 @@ public class MyHistoryActivity : AppCompatActivity() {
                 val drinks = snapshot!!.child("drink_histories").getChildren()
                 drinks.forEach { x ->
                     val drink = x.getValue(javaClass<DrinkHistory>())
-                    drinkAdapter.add(drink.drinkName + " - " + DateTime(drink.createdAt).toString("yyyy/MM/dd"))
+                    historyAdapter.add(drink.drinkName + " - " + DateTime(drink.createdAt).toString("yyyy/MM/dd"))
                 }
             }
 
