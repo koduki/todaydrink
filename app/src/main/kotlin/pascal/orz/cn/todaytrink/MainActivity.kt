@@ -11,10 +11,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
-import com.firebase.client.ChildEventListener
-import com.firebase.client.DataSnapshot
-import com.firebase.client.Firebase
-import com.firebase.client.FirebaseError
+import android.widget.Toast
+import com.firebase.client.*
 import kotlinx.android.synthetic.activity_main.drinkListView
 import net.danlew.android.joda.JodaTimeAndroid
 import java.io.File
@@ -33,6 +31,33 @@ public class MainActivity : AppCompatActivity() {
         drinkListView.setAdapter(drinkAdapter)
 
         val firebase = Firebase("https://shining-heat-6127.firebaseio.com/")
+        firebase.addAuthStateListener(object :Firebase.AuthStateListener{
+            override fun onAuthStateChanged(authData:AuthData?){
+                if (authData != null) {
+                    // user is logged in
+                    Toast.makeText(getApplication(), "uid: " + authData.getUid(), Toast.LENGTH_LONG)?.show()
+                } else {
+                    // user is not logged in
+                    Toast.makeText(getApplication(), "no login", Toast.LENGTH_LONG)?.show()
+                }
+            }
+        })
+
+
+        firebase.authWithOAuthToken("github", "796247b9850353665edb", object:Firebase.AuthResultHandler {
+            override fun onAuthenticated(authData:AuthData) {
+                // Authenticated successfully with payload authData
+                Toast.makeText(getApplication(), "success: " + authData.getUid(), Toast.LENGTH_LONG)?.show()
+
+            }
+            override fun  onAuthenticationError(firebaseError:FirebaseError) {
+                // Authenticated failed with error firebaseError
+                Toast.makeText(getApplication(), "error:" + firebaseError.getCode(), Toast.LENGTH_LONG)?.show()
+
+            }
+        });
+
+
         firebase.addChildEventListener(object :ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot?, previousChildKey: String?) {
                 val drinks = snapshot!!.child("drinks").getChildren()
