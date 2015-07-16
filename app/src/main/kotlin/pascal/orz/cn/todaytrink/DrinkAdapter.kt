@@ -1,6 +1,5 @@
 package pascal.orz.cn.todaytrink
 
-import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -13,19 +12,16 @@ import android.widget.TextView
  */
 public class DrinkAdapter(private val mContext: Context) : ArrayAdapter<Drink>(mContext, android.R.layout.simple_list_item_1) {
 
-//    private val mInflater: LayoutInflater
-//    {
-//        mInflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-//    }
-//
-//    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-//        val view = convertView ?: mInflater.inflate(R.layout.list_item_drink, null)
-//
-//        val item = getItem(position)
-//
-//        val name = view.findViewById(R.id.drink_name) as TextView
-//        name.setText(item.name)
-//
-//        return view
-//    }
+    private val mInflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val view = convertView ?: mInflater.inflate(R.layout.list_item_drink, null)
+
+        val item = getItem(position)
+
+        val name = view.findViewById(R.id.drink_name) as TextView
+        name.setText(item.name)
+
+        return view
+    }
 }
