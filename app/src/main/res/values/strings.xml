@@ -6,5 +6,6 @@
     <string name="action_home">お酒一覧</string>
     <string name="action_add_drink">お酒を追加</string>
     <string name="action_my_drink_history">飲酒履歴へ</string>
+    <string name="title_activity_login">LoginActivity</string>
 
 </resources>

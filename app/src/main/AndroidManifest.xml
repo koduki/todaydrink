@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
     <application
         android:allowBackup="true"
@@ -12,24 +14,28 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="pascal.orz.cn.todaytrink.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="pascal.orz.cn.todaytrink.DrinkActivity"
+            android:name=".DrinkActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="pascal.orz.cn.todaytrink.MyHistoryActivity"
+            android:name=".MyHistoryActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="pascal.orz.cn.todaytrink.DrinkAddActivity"
-            android:label="@string/app_name" >
+            android:name=".DrinkAddActivity"
+            android:label="@string/app_name" ></activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login">
         </activity>
     </application>
 

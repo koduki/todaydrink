@@ -1,13 +1,10 @@
 package pascal.orz.cn.todaytrink
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Base64
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -18,7 +15,6 @@ import kotlinx.android.synthetic.activity_main.drinkListView
 import net.danlew.android.joda.JodaTimeAndroid
 import java.io.File
 import java.io.FileOutputStream
-import java.net.URLDecoder
 
 public class MainActivity : AppCompatActivity() {
 
@@ -119,7 +115,9 @@ public class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.action_my_drink_history -> {
-                val intent = Intent(getApplicationContext(), javaClass<MyHistoryActivity>())
+                //                val intent = Intent(getApplicationContext(), javaClass<MyHistoryActivity>())
+                val intent = Intent(getApplicationContext(), javaClass<LoginActivity>())
+
                 startActivity(intent)
                 true
             }
